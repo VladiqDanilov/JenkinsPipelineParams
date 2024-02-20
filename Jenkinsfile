@@ -2,12 +2,36 @@ pipeline {
     agent any
 
     parameters {
-        // Active Choice параметр
-        choice(
-            name: 'typeParam',
-            choices: ['Integer Squares', 'Non-Integer Squares'],
-            description: 'Choose type of numbers'
-        )
+        activeChoiceParam('typeParam') {
+            choiceType('SINGLE_SELECT')
+            description('Choose type of numbers')
+            filterable(true)
+            groovyScript {
+                script("""
+                    return ['Integer Squares', 'Non-Integer Squares']
+                """)
+            }
+        }
+        dynamicReferenceParameter {
+            choiceType('ET_FORMATTED_HTML')
+            omitValueField(true)
+            description('Choose numbers')
+            name('integer_squares_param')
+            randomName('choice-parameter-5631314456178625')
+            referencedParameters('typeParam')
+            script {
+                groovyScript {
+                    script("""
+                        def type = binding.variables['typeParam']
+                        if (type == 'Integer Squares') {
+                            return ['36', '64', '81']
+                        } else {
+                            return ['13', '15', '21', '23', '45', '46', '64', '66']
+                        }
+                    """)
+                }
+            }
+        }
     }
 
     stages {
@@ -16,16 +40,7 @@ pipeline {
                 script {
                     try {
                         def type = params.typeParam
-                        def number
-                        // Получаем значение в зависимости от выбранного типа параметра
-                        if (type == 'Integer Squares') {
-                            // Dynamic Reference параметр для Integer Squares
-                            number = params.integer_squares_param
-                        } else {
-                            // Dynamic Reference параметр для Non-Integer Squares
-                            number = params.non_integer_squares_param
-                        }
-                        
+                        def number = params.integer_squares_param
                         double parsedNumber = Double.parseDouble(number)
 
                         if (type == 'Integer Squares' && !(parsedNumber % 1 == 0)) {
