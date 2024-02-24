@@ -8,25 +8,16 @@ properties([
             ],
             description: 'Choose type of numbers'
         ),
-        [$class: 'CascadeChoiceParameter',
-            choiceType: 'PT_SINGLE_SELECT',
-            filterLength: 1,
-            filterable: false,
+        cascadeChoice(
             name: 'integer_squares_param',
-            randomName: 'choice-parameter-5631314456178625',
-            referencedParameters: 'typeParam',
+            description: 'Choose numbers',
             script: [
                 $class: 'GroovyScript',
                 fallbackScript: [
                     classpath: [],
                     sandbox: true,
                     script: """
-                        def type = binding.variables['typeParam']
-                        if (type == 'Integer Squares') {
-                            return ['36', '64', '81']
-                        } else {
-                            return ['13', '15', '21', '23', '45', '46', '64', '66']
-                        }
+                        return ['']
                     """
                 ],
                 script: [
@@ -42,7 +33,7 @@ properties([
                     """
                 ]
             ]
-        ]
+        )
     ])
 ])
 pipeline {
