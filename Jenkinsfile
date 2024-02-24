@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    properties([
+    options {
         parameters([
             activeChoiceParam('typeParam') {
                 choiceType('SINGLE_SELECT')
@@ -51,7 +51,7 @@ pipeline {
                 }
             }
         ])
-    ])
+    }
 
     stages {
         stage('Square Root') {
@@ -69,12 +69,4 @@ pipeline {
                         }
 
                         double result = Math.sqrt(parsedNumber)
-                        echo "Корень из ${number} равен ${result}"
-                    } catch (Exception e) {
-                        echo "Ошибка: ${e.message}"
-                    }
-                }
-            }
-        }
-    }
-}
+             
