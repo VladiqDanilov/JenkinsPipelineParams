@@ -56,4 +56,16 @@ pipeline {
                         if (type == 'Integer Squares' && !(parsedNumber % 1 == 0)) {
                             throw new Exception("Выбрано неверное значение для типа 'Integer Squares'")
                         } else if (type == 'Non-Integer Squares' && parsedNumber % 1 == 0) {
-                            throw new Exception("Выбр
+                            throw new Exception("Выбрано неверное значение для типа 'Non-Integer Squares'")
+                        }
+
+                        double result = Math.sqrt(parsedNumber)
+                        echo "Корень из ${number} равен ${result}"
+                    } catch (Exception e) {
+                        echo "Ошибка: ${e.message}"
+                    }
+                }
+            }
+        }
+    }
+}
