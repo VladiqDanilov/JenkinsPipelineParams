@@ -13,7 +13,6 @@ properties([
             filterLength: 1,
             filterable: false,
             name: 'integer_squares_param',
-            randomName: 'choice-parameter-5631314456178625',
             referencedParameters: 'typeParam',
             script: [
                 $class: 'GroovyScript',
