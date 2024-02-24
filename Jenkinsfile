@@ -1,41 +1,32 @@
 pipeline {
     agent any
 
-    parameters {
-        activeChoiceParam('typeParam') {
-            choiceType('SINGLE_SELECT')
-            description('Choose type of numbers')
-            filterable(true)
-            groovyScript {
-                script("""
-                    return ['Integer Squares', 'Non-Integer Squares']
-                """)
-                fallbackScript {
-                    classpath([])
-                    sandbox(true)
-                    script('return ["Integer Squares", "Non-Integer Squares"]')
-                }
-            }
-        }
-         dynamicReferenceParameter {
-            choiceType('ET_FORMATTED_HTML')
-            omitValueField(true)
-            description('Choose numbers')
-            name('integer_squares_param')
-            referencedParameters('typeParam')
-            script {
+    properties([
+        parameters([
+            activeChoiceParam('typeParam') {
+                choiceType('SINGLE_SELECT')
+                description('Choose type of numbers')
+                filterable(true)
                 groovyScript {
                     script("""
-                        def type = binding.variables['typeParam']
-                        if (type == 'Integer Squares') {
-                            return ['36', '64', '81']
-                        } else {
-                            return ['13', '15', '21', '23', '45', '46', '64', '66']
-                        }
+                        return ['Integer Squares', 'Non-Integer Squares']
                     """)
                     fallbackScript {
                         classpath([])
                         sandbox(true)
+                        script('return ["Integer Squares", "Non-Integer Squares"]')
+                    }
+                }
+            },
+            dynamicReferenceParameter {
+                choiceType('ET_FORMATTED_HTML')
+                omitValueField(true)
+                description('Choose numbers')
+                name('integer_squares_param')
+                randomName('choice-parameter-5631314456178625')
+                referencedParameters('typeParam')
+                script {
+                    groovyScript {
                         script("""
                             def type = binding.variables['typeParam']
                             if (type == 'Integer Squares') {
@@ -44,11 +35,23 @@ pipeline {
                                 return ['13', '15', '21', '23', '45', '46', '64', '66']
                             }
                         """)
+                        fallbackScript {
+                            classpath([])
+                            sandbox(true)
+                            script("""
+                                def type = binding.variables['typeParam']
+                                if (type == 'Integer Squares') {
+                                    return ['36', '64', '81']
+                                } else {
+                                    return ['13', '15', '21', '23', '45', '46', '64', '66']
+                                }
+                            """)
+                        }
                     }
                 }
             }
-        }
-    }
+        ])
+    ])
 
     stages {
         stage('Square Root') {
