@@ -5,9 +5,10 @@ properties([
             choices: [
                 'Integer Squares',
                 'Non-Integer Squares'
-            ]
+            ],
+            description: 'Choose type of numbers'
         ),
-        [$class: 'ChoiceParameter',
+        [$class: 'CascadeChoiceParameter',
             choiceType: 'PT_SINGLE_SELECT',
             filterLength: 1,
             filterable: false,
