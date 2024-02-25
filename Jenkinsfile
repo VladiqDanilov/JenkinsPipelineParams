@@ -42,7 +42,7 @@ pipeline {
                     try {
                         def type = params.typeParam
                         def number = params.integer_squares_param
-                        double parsedNumber = Double.parseDouble(number)
+                        double parsedNumber = double.parseDouble(number)
 
                         if (type == 'Integer Squares' && !(parsedNumber % 1 == 0)) {
                             throw new Exception("Выбрано неверное значение для типа 'Integer Squares'")
