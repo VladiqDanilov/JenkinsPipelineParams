@@ -11,7 +11,7 @@ properties([
             choiceType: 'PT_SINGLE_SELECT',
             description: 'Choose numbers',
             filterLength: 1,
-            filterable: true,
+            filterable: false,
             name: 'integer_squares_param',
             randomName: 'choice-parameter-5631314456178625',
             referencedParameters: 'typeParam',
