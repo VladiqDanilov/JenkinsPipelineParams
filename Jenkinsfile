@@ -7,25 +7,28 @@ properties([
                 'Non-Integer Squares'
             ]
         ),
-        [$class: 'ChoiceParameter',
-            choiceType: 'PT_SINGLE_SELECT',
+        [$class: 'CascadeChoiceParameter',
+            choiceType: 'ET_FORMATTED_HTML',
+            description: 'Choose numbers',
             filterLength: 1,
-            filterable: false,
+            filterable: true,
             name: 'integer_squares_param',
             randomName: 'choice-parameter-5631314456178625',
             referencedParameters: 'typeParam',
             script: [
                 $class: 'GroovyScript',
-                classpath: [],
-                sandbox: true,
-                script: """
-                    def type = binding.variables['typeParam']
-                    if (type == 'Integer Squares') {
-                        return ['36', '64', '81']
-                    } else {
-                        return ['13', '15', '21', '23', '45', '46', '64', '66']
-                    }
-                """
+                script: [
+                    classpath: [],
+                    sandbox: true,
+                    script: """
+                        def type = typeParam
+                        if (type == 'Integer Squares') {
+                            return ['36', '64', '81']
+                        } else {
+                            return ['13', '15', '21', '23', '45', '46', '64', '66']
+                        }
+                    """
+                ]
             ]
         ]
     ])
