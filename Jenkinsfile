@@ -16,30 +16,16 @@ properties([
             referencedParameters: 'typeParam',
             script: [
                 $class: 'GroovyScript',
-                fallbackScript: [
-                    classpath: [],
-                    sandbox: true,
-                    script: """
-                        def type = binding.variables['typeParam']
-                        if (type == 'Integer Squares') {
-                            return ['36', '64', '81']
-                        } else {
-                            return ['13', '15', '21', '23', '45', '46', '64', '66']
-                        }
-                    """
-                ],
-                script: [
-                    classpath: [],
-                    sandbox: true,
-                    script: """
-                        def type = binding.variables['typeParam']
-                        if (type == 'Integer Squares') {
-                            return ['36', '64', '81']
-                        } else {
-                            return ['13', '15', '21', '23', '45', '46', '64', '66']
-                        }
-                    """
-                ]
+                classpath: [],
+                sandbox: true,
+                script: """
+                    def type = binding.variables['typeParam']
+                    if (type == 'Integer Squares') {
+                        return ['36', '64', '81']
+                    } else {
+                        return ['13', '15', '21', '23', '45', '46', '64', '66']
+                    }
+                """
             ]
         ]
     ])
