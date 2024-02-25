@@ -8,7 +8,7 @@ properties([
             ]
         ),
         [$class: 'CascadeChoiceParameter',
-            choiceType: 'ET_FORMATTED_HTML',
+            choiceType: 'PT_SINGLE_SELECT',
             description: 'Choose numbers',
             filterLength: 1,
             filterable: true,
